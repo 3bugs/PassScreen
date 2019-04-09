@@ -19,27 +19,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mPassCodeTextView = findViewById(R.id.pass_code_text_view);
 
-        Button digit0Button = findViewById(R.id.digit_0_button);
-        Button digit1Button = findViewById(R.id.digit_1_button);
-        Button digit2Button = findViewById(R.id.digit_2_button);
-        Button digit3Button = findViewById(R.id.digit_3_button);
-        Button digit4Button = findViewById(R.id.digit_4_button);
-        Button digit5Button = findViewById(R.id.digit_5_button);
-        Button digit6Button = findViewById(R.id.digit_6_button);
-        Button digit7Button = findViewById(R.id.digit_7_button);
-        Button digit8Button = findViewById(R.id.digit_8_button);
-        Button digit9Button = findViewById(R.id.digit_9_button);
-
-        digit0Button.setOnClickListener(this);
-        digit1Button.setOnClickListener(this);
-        digit2Button.setOnClickListener(this);
-        digit3Button.setOnClickListener(this);
-        digit4Button.setOnClickListener(this);
-        digit5Button.setOnClickListener(this);
-        digit6Button.setOnClickListener(this);
-        digit7Button.setOnClickListener(this);
-        digit8Button.setOnClickListener(this);
-        digit9Button.setOnClickListener(this);
+        findViewById(R.id.digit_0_button).setOnClickListener(this);
+        findViewById(R.id.digit_1_button).setOnClickListener(this);
+        findViewById(R.id.digit_2_button).setOnClickListener(this);
+        findViewById(R.id.digit_3_button).setOnClickListener(this);
+        findViewById(R.id.digit_4_button).setOnClickListener(this);
+        findViewById(R.id.digit_5_button).setOnClickListener(this);
+        findViewById(R.id.digit_6_button).setOnClickListener(this);
+        findViewById(R.id.digit_7_button).setOnClickListener(this);
+        findViewById(R.id.digit_8_button).setOnClickListener(this);
+        findViewById(R.id.digit_9_button).setOnClickListener(this);
 
         Button backSpaceButton = findViewById(R.id.back_space_button);
         backSpaceButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 String currentInput = mPassCodeTextView.getText().toString();
                 if (currentInput.length() > 0) {
+                    // ลบตัวขวาสุดทิ้ง
                     String newInput = currentInput.substring(0, currentInput.length() - 1);
                     mPassCodeTextView.setText(newInput);
                 }
@@ -58,12 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         String currentInput = mPassCodeTextView.getText().toString();
         if (currentInput.length() < 4) {
+            // ใช้ตัวเลขที่เป็น text บนปุ่ม
             String digit = ((Button) v).getText().toString();
             String newInput = currentInput + digit;
             mPassCodeTextView.setText(newInput);
 
             if (newInput.length() == 4) {
-                if (checkPassCode(newInput)) {
+                if (isPassCodeValid(newInput)) {
                     new AlertDialog.Builder(MainActivity.this)
                             .setMessage("รหัสผ่านถูกต้อง")
                             .setPositiveButton("OK", null)
@@ -80,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private boolean checkPassCode(String newInput) {
+    private boolean isPassCodeValid(String newInput) {
         return "1234".equals(newInput);
     }
 }
