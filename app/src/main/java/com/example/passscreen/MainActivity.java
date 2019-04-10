@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String PASS_CODE = "1234";
+
     private TextView mPassCodeTextView;
 
     @Override
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mPassCodeTextView = findViewById(R.id.pass_code_text_view);
 
-        findViewById(R.id.digit_0_button).setOnClickListener(this);
         findViewById(R.id.digit_1_button).setOnClickListener(this);
         findViewById(R.id.digit_2_button).setOnClickListener(this);
         findViewById(R.id.digit_3_button).setOnClickListener(this);
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.digit_7_button).setOnClickListener(this);
         findViewById(R.id.digit_8_button).setOnClickListener(this);
         findViewById(R.id.digit_9_button).setOnClickListener(this);
+        findViewById(R.id.digit_0_button).setOnClickListener(this);
 
         Button backSpaceButton = findViewById(R.id.back_space_button);
         backSpaceButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     Toast.makeText(
                             MainActivity.this,
-                            newInput + " ไม่ใช่รหัสผ่านที่ถูกต้อง !!!",
+                            newInput + " ยังไม่ถูก กรุณาลองใหม่",
                             Toast.LENGTH_SHORT
                     ).show();
                     mPassCodeTextView.setText("");
@@ -71,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // logic ที่ใช้ตรวจสอบว่ารหัสผ่านถูกต้องหรือไม่
     private boolean isPassCodeValid(String newInput) {
-        return "1234".equals(newInput);
+        return PASS_CODE.equals(newInput);
     }
 }
